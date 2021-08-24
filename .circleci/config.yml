@@ -4,14 +4,24 @@ workflows:
   test-deploy:
     jobs:
       - test
+  daily:
+    jobs:
+      - test
+    triggers:
+      - schedule:
+          cron: 0 7 * * *
+          filters:
+            branches:
+              only:
+                - master
 
 jobs:
-  test: 
+  test:
     docker:
       - image: cimg/node:14.13.0
     steps:
       - checkout
-      - run: 
+      - run:
           name: Install dependencies
           command: npm install
       - run:
