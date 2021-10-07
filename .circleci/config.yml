@@ -6,14 +6,15 @@ workflows:
       - test
 
 jobs:
-  test: 
+  test:
     docker:
       - image: cimg/node:14.13.0
     steps:
       - checkout
-      - run: 
+      - run:
           name: Install dependencies
           command: npm install
       - run:
           name: Run Tests
           command: npm run test
+    resource_class: large
